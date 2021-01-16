@@ -121,66 +121,12 @@ abstract class BaseModel extends Model {
         return $query->get()->toArray();
     }
 
-    public function getPagination($cond = null, $limit = 10, $orderBy = array('id' => 'desc')) {
-        $query = $this;
-        if (is_array($cond) && !empty($cond)) {
-            foreach ($cond as $key => $value) {
-                $query = $query->where($key, $value);
-            }
-        }
-
-        if (is_array($orderBy) && !empty($orderBy)) {
-            foreach ($orderBy as $key => $value) {
-                $query = $query->orderBy($key, $value);
-            }
-        }
-        return $query->paginate($limit);
-    }
-
     public function getTable() {
         return $this->table;
     }
 
     public function getFields() {
         return (isset($this->fields) && !empty($this->fields)) ? $this->fields : array();
-    }
-
-    public function toggleField($id, $field, $toggleValues = array(0, 1)) {
-        $itemDetail = $this->find($id);
-        if (!empty($itemDetail)) {
-            if ($itemDetail->status == $toggleValues[0]) {
-                return $this->where('id', $id)->update(array($field => $toggleValues[1]));
-            } else {
-                return $this->where('id', $id)->update(array($field => $toggleValues[0]));
-            }
-        }
-    }
-
-    public function checkDuplicate($data, $id, $checkFields = []) {
-        $cond = array();
-        foreach ($data as $key => $value) {
-            if (in_array($key, $checkFields)) {
-                $cond[$key] = $value;
-            }
-        }
-        if (!empty($cond)) {
-            $results = $this->getWhereOr($cond);
-            if (empty($results)) {
-                return TRUE;
-            } else {
-                foreach ($results as $k => $item) {
-                    if ($item['id'] == $id) {
-                        unset($results[$k]);
-                    }
-                }
-                return empty($results);
-            }
-        }
-        return FALSE;
-    }
-
-    public function getTableColumns() {
-        return Schema::getColumnListing($this->table);
     }
 
 }
