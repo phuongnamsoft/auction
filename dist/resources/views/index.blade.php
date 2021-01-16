@@ -9,6 +9,11 @@
     <title>{{ config('site.app_name') }}</title>
     <!-- Styles -->
     <link href="{{ '/css/app.css?' . time() }}" rel="stylesheet" />
+    <script>
+        window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+            ]) !!};
+    </script>
 </head>
 <body>
 <div id="app"></div>
