@@ -18,8 +18,10 @@ class CreateBidsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('auction_id')->unsigned();
             $table->integer('amount');
-            $table->integer('is_winner')->nullable()->default(ACTIVE_STATUS_INACTIVE);
-            $table->timestamps();
+            $table->tinyInteger('is_winner')->nullable()->default(0);
+
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP()'));
+            $table->timestamp('updated_at')->nullable()->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP()'));
         });
     }
 

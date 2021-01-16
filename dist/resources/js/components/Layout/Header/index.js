@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {
@@ -38,30 +38,7 @@ class Header extends Component {
                         <div className="col-lg-2 order-lg-0 order-0 px-lg-2">
                             <ul className="d-flex justify-content-center align-items-center lf-user-menu">
                                 <li>
-                                    <a href="/login">Login</a>
-                                </li>
-                                <li>
-                                    <a href="/register">Signup</a>
-                                </li>
-                                <li>
-                                    <div className="btn-group lf-language">
-                                        <button type="button" className="dropdown-toggle" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                            <div className="">
-                                                <div className="lf-language-text">EN</div>
-                                            </div>
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-right">
-                                            <a className="dropdown-item"
-                                               href="/en/">
-                                                <div className="lf-language-text">EN</div>
-                                            </a>
-                                            <a className="dropdown-item"
-                                               href="/bn/">
-                                                <div className="lf-language-text">BN</div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <Link to="/auth/logout">Logout</Link>
                                 </li>
                             </ul>
                         </div>

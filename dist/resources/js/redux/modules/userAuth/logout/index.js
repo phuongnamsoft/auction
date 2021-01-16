@@ -18,7 +18,6 @@ function startFetchData() {
 
 function fetchDataSuccess(data) {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('user');
     return {
         type: LOGOUT_SUCCESS,
         data
@@ -35,7 +34,7 @@ function fetchDataFailure(err) {
 export function fetchDataAsync(token) {
     return dispatch => {
         dispatch(startFetchData());
-        HTTP.post('user/logout', { token })
+        HTTP.post('auth/logout', { token })
             .then(res => { dispatch({ type: NOT_LOGIN }); dispatch(fetchDataSuccess(res.data)) })
             .catch(err => dispatch(fetchDataFailure(err)));
     }

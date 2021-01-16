@@ -17,7 +17,7 @@ class CreateAuctionsTable extends Migration
 
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('user_id');
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('currency_id')->unsigned();
             $table->dateTime('start_date');
@@ -29,10 +29,11 @@ class CreateAuctionsTable extends Migration
 
             $table->integer('min_bid_amount')->unsigned();
             $table->integer('shipping_fee')->unsigned();
-            
+
             $table->integer('status')->default(0);
 
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP()'));
+            $table->timestamp('updated_at')->nullable()->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP()'));
 
         });
     }

@@ -10,9 +10,7 @@ const PublicRoutes = ({component: Component, isAuthenticated, ...rest}) => {
         render={
             props =>
                 (
-                    <Layout>
-                        <Component {...props} />
-                    </Layout>
+                    rest.layout ? (<Layout> <Component {...props} /> </Layout>) : (<Component {...props} />)
                 )
         }
     />

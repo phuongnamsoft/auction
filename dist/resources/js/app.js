@@ -6,17 +6,16 @@ import Routes from './routes';
 import store from './redux/store';
 import HTTP from './utils/HTTP';
 import { LOGIN } from './redux/modules/checkAuthenticated';
-const token = localStorage.getItem('access_token');
 
+require('bootstrap');
+require('../css/app.css');
+
+const token = localStorage.getItem('access_token');
 
 if (token) {
     HTTP.defaults.headers.common['Authorization-Token'] = token;
     store.dispatch({ type: LOGIN });
 }
-
-require('bootstrap');
-require('../css/app.css');
-
 
 render(
     <Provider store={store}>

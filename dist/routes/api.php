@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'namespace' => 'Api',
+], function () {
+
+    Route::post('/auth/login', 'AuthController@login')->name('api.auth.login');
+    Route::post('/auth/logout', 'AuthController@logout')->name('api.auth.logout');
+
+});
+
+Route::group([
+    'namespace' => 'Api',
+    'middleware' => 'auth:api',
+], function () {
+
+    Route::get('/auth/check-login', 'AuthController@checkLogin')->name('api.auth.checkLogin');
+    Route::get('/auctions', 'AuctionController@getListAuction')->name('api.auction.getListAuction');
+
 });

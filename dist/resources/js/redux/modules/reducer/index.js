@@ -7,5 +7,7 @@ import checkAuth from '../checkAuthenticated';
 
 const reducer = combineReducers({
     checkAuth,
+    userLogin,
+    userLogout
 });
 export default reducer;

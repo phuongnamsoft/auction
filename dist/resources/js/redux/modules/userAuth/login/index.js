@@ -8,11 +8,7 @@ const LOADING = 'auction/login/LOADING';
 const LOGIN_SUCCESS = 'auction/login/LOAD_SUCCESS';
 const LOGIN_FAILURE = 'auction/login/LOAD_FAILURE';
 
-
-
-// actionCreators
 function startFetchData() {
-
     return {
         type: LOADING
     }
@@ -21,8 +17,6 @@ function startFetchData() {
 function fetchDataSuccess(data) {
     if (data.access_token) {
         localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('user', data.id);
-        HTTP.defaults.headers.common['Authorization-Token'] = data.access_token;
     }
     return {
         type: LOGIN_SUCCESS,
@@ -40,7 +34,7 @@ function fetchDataFailure(err) {
 export function fetchDataAsync(email, password) {
     return dispatch => {
         dispatch(startFetchData());
-        axios.post('user/login', { email, password })
+        axios.post('auth/login', { email, password })
             .then(res => { dispatch({ type: LOGIN }); dispatch(fetchDataSuccess(res.data)) })
             .catch(err => dispatch(fetchDataFailure(err)));
 
