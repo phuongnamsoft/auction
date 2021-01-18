@@ -29,6 +29,7 @@ Route::group([
 ], function () {
 
     Route::get('/auth/check-login', 'AuthController@checkLogin')->name('api.auth.checkLogin');
-    Route::get('/auctions', 'AuctionController@getListAuction')->name('api.auction.getListAuction');
+    Route::get('/auctions', 'AuctionController@index')->name('api.auction.index');
+    Route::get('/auction/{id}', 'AuctionController@detail')->name('api.auction.detail');
 
 });

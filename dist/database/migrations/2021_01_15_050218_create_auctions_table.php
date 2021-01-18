@@ -19,7 +19,7 @@ class CreateAuctionsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('currency_id')->unsigned();
+            $table->string('currency_code', 20)->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->text('content');

@@ -13,7 +13,7 @@ require('../css/app.css');
 const token = localStorage.getItem('access_token');
 
 if (token) {
-    HTTP.defaults.headers.common['Authorization-Token'] = token;
+    HTTP.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     store.dispatch({ type: LOGIN });
 }
 

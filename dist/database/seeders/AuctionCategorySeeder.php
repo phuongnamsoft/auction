@@ -23,6 +23,11 @@ class AuctionCategorySeeder extends Seeder {
                 'description' => 'All antique potteries',
                 'status' => 1
             ],
+            [
+                'name' => 'Special Antiques',
+                'description' => 'All Special Antiques',
+                'status' => 1
+            ],
         ]);
     }
 }
