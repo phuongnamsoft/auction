@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AuctionItemBlock from '../common/AuctionItemBlock';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Home extends Component {
     constructor(props) {
@@ -15,35 +15,49 @@ class Home extends Component {
                 <div className="content">
                     <div className="cmb-content-wrapper" id="cmb-content-wrapper">
 
-                        <section className="cmb_section mt-5 mb-5" data-cmb-wrapper="cmb_section" data-cmb-id="11"
-                                 data-cmb-element-type="static-layout">
+                        <section className="cmb_section mt-5 mb-5">
                             <div className="section-overlay">
-                                <div className="cmb_container container" data-cmb-wrapper="cmb_container"
-                                     data-cmb-element-type="static-layout" data-cmb-id="12">
-                                    <div className="cmb_row row" data-cmb-wrapper="cmb_row"
-                                         data-cmb-element-type="static-layout" data-cmb-id="13">
-                                        <div className="cmb_column col-sm-12" data-cmb-wrapper="cmb_column"
-                                             data-cmb-element-type="static-layout" data-cmb-id="14">
-
-                                            <div className="cmb-margin-bottom cmb_featured_title cmb-element"
-                                                 data-cmb-wrapper="cmb_featured_title" data-cmb-id="16"
-                                                 data-cmb-element-type="static-layout">
-                                                <div className="cmb-title-wrapper">
-                                                    <h2 className="cmb-title"><span
-                                                        className="cmb-single-line-editable-text cmb-title-highlight-color">Latest</span>
-                                                        <span className="cmb-single-line-editable-text">Auctions</span>
-                                                    </h2>
-                                                    <div className="cmb-title-border"></div>
-                                                    <div className="ml-auto">
-                                                        <Link to="/auctions" className="cmb-title-link"><span className="cmb-single-line-editable-text">View All Auction</span></Link>
+                                <div className="cmb_container container">
+                                    <div className="cmb_row row light-header py-3 px-3">
+                                        <form action="" method="get"
+                                                      className="lf-filter-form">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <div className="form-group d-flex">
+                                                                <div className="lf-select lf-flex-1"><select
+                                                                    name="p-sort"
+                                                                    className="form-control lf-filter-sort-by">
+                                                                    <option value="">Sort by</option>
+                                                                    <option value="0">Auction Type</option>
+                                                                    <option value="1">Starting Price</option>
+                                                                    <option value="2">Category</option>
+                                                                    <option value="3">Currency</option>
+                                                                </select></div>
+                                                                <button type="submit"
+                                                                        className="btn btn-danger ml-1">
+                                                                    <i className="fa fa-arrow-right"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="d-flex">
+                                                                <div className="lf-flex-5 ml-1">
+                                                                    <input type="text"
+                                                                           name="p-srch"
+                                                                           placeholder="search"
+                                                                           value=""
+                                                                           className="form-control lf-filter-search mr-0"/>
+                                                                </div>
+                                                                <button type="submit"
+                                                                        className="auctioneer-primary-color btn btn-danger ml-1">
+                                                                    <i className="fa fa-search"></i></button>
+                                                                <a href="javascript:"
+                                                                   className="lf-filter-toggler ml-1 btn btn-warning"><i
+                                                                    className="fa fa-filter"></i></a></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </form>
                                     </div>
-                                    <div data-cmb-wrapper="cmb_auction" data-cmb-id="15"
-                                         data-cmb-element-type="dynamic-layout" className="cmb_auction"
-                                         data-cmb-dynamic-values="name:short_code_auction_list|column:3|item:6|type:latest">
+                                    <div className="cmb_auction">
                                         <div className="row">
                                             <AuctionItemBlock/>
                                             <AuctionItemBlock/>
@@ -61,10 +75,11 @@ class Home extends Component {
         );
     }
 
-    }
-    const mapStateToProps = (state) => {
-        return {
+}
+
+const mapStateToProps = (state) => {
+    return {
         isToggleTabControl: state.isToggleTabControl
     }
-    }
-    export default connect(mapStateToProps, null)(Home);
+}
+export default connect(mapStateToProps, null)(Home);
