@@ -2873,8 +2873,8 @@ var AuctionDetailTabs = /*#__PURE__*/function (_Component) {
                           children: item.id
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
                           children: item.user_name
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
-                          children: item.amount
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("td", {
+                          children: ["USD ", _utils_StringHelper__WEBPACK_IMPORTED_MODULE_4__.default.formatMoney(item.amount)]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
                           children: item.created_at
                         })]

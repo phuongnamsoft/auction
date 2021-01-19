@@ -73,7 +73,7 @@ class AuctionDetailTabs extends Component {
                                                     <tr key={i}>
                                                         <td>{item.id}</td>
                                                         <td>{item.user_name}</td>
-                                                        <td>{item.amount}</td>
+                                                        <td>USD {StringHelper.formatMoney(item.amount)}</td>
                                                         <td>{item.created_at}</td>
                                                     </tr>
                                                 )}
