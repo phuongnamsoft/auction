@@ -46,7 +46,8 @@ class AuctionController extends BaseController {
 
     public function bidHistories(Request $request, $id) {
         try {
-            return response(['status' => 1, 'message' => 'Success', 'items' => (new BidModel)->getByCond(['auction_id' => $id], ['id' => 'desc'])], 200);
+            $items = (new BidModel)->getJoinQuery()->where('bids.auction_id', $id)->orderBy('id','desc')->limit(10)->get()->toArray();
+            return response(['status' => 1, 'message' => 'Success', 'items' => $items], 200);
         } catch (\Throwable $t) {
             return response(['status' => 0, 'message' => 'Error:' . $t->getMessage()], 500);
         }

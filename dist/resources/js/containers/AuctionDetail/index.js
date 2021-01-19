@@ -6,6 +6,7 @@ import * as moment from "moment";
 import StringHelper from "../../utils/StringHelper"
 import MyCountdown from "../common/MyCountdown";
 import AuctionDetailTabs from "./AuctionDetailTabs";
+import {toast} from "react-toastify";
 
 class AuctionDetail extends Component {
     constructor(props) {
@@ -57,7 +58,23 @@ class AuctionDetail extends Component {
     }
 
     bidNowBtn(event) {
-
+        const auctionId = this.props.match.params.id;
+        HTTP.post('auction/' + auctionId + '/bid-now', {amount: this.state.currentBidAmount})
+            .then(res => {
+                if (res.status == 200) {
+                    if (res.data.status == 1) {
+                        toast.success(res.data.message)
+                    } else {
+                        toast.error(res.data.message)
+                    }
+                } else {
+                    alert('Failed to handle the data. If it continues many times, please contact the administrator.\n');
+                    window.location.href = '/';
+                }
+            })
+            .catch(function () {
+                alert('Failed to connect to the server.');
+            });
     }
 
     autoBidBtn(event) {
@@ -65,11 +82,10 @@ class AuctionDetail extends Component {
         HTTP.post('auction/' + auctionId + '/auto-bid', {})
             .then(res => {
                 if (res.status == 200) {
-                    if (res.data.status === 1) {
-                        alert('Successfully.\n');
+                    if (res.data.status == 1) {
+                        toast.success(res.data.message)
                     } else {
-                        alert(res.data.message);
-                        window.location.href = '/';
+                        toast.error(res.data.message)
                     }
                 } else {
                     alert('Failed to handle the data. If it continues many times, please contact the administrator.\n');
@@ -192,7 +208,6 @@ class AuctionDetail extends Component {
                                                 </li>
                                             </ul>
 
-
                                             <ul className="list-group mt-3">
                                                 <li className="list-group-item d-flex justify-content-between align-items-center">
                                                     <span className="font-weight-bold color-666">
@@ -222,8 +237,14 @@ class AuctionDetail extends Component {
                                                         </span>
                                                         <span className="invalid-feedback d-block"></span>
                                                     </div>
-                                                    <button type="button"  className="btn lf-custom-btn w-100 float-right" onClick={this.bidNowBtn.bind(this)}>Bid Now</button>
-                                                    <button type="button" className="btn btn-success w-100 float-right mt-2" onClick={this.autoBidBtn.bind(this)}>Auto Bid</button>
+                                                    <button type="button"
+                                                            className="btn lf-custom-btn w-100 float-right"
+                                                            onClick={this.bidNowBtn.bind(this)}>Bid Now
+                                                    </button>
+                                                    <button type="button"
+                                                            className="btn btn-success w-100 float-right mt-2"
+                                                            onClick={this.autoBidBtn.bind(this)}>Auto Bid
+                                                    </button>
                                                 </div>
                                             </div>
 

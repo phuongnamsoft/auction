@@ -39,9 +39,7 @@ class Footer extends Component {
                                                     </li>
                                                     <li className="d-block">
                                                         <i className="fa fa-envelope"></i>
-                                                        <a href="#">
-                                                            sales@scopicsoftware.com
-                                                        </a>
+                                                        <a href="#">sales@scopicsoftware.com</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -55,21 +53,21 @@ class Footer extends Component {
                                                 <ul>
                                                     <li className="d-block">
                                                         <i className="fa fa-link"></i>
-                                                        <a href="/auction-rules">
+                                                        <a href="#">
                                                             Auction Rules
                                                         </a>
                                                     </li>
 
                                                     <li className="d-block">
                                                         <i className="fa fa-link"></i>
-                                                        <a href="/deposit-policy">
+                                                        <a href="#">
                                                             Deposit Policy
                                                         </a>
                                                     </li>
 
                                                     <li className="d-block">
                                                         <i className="fa fa-link"></i>
-                                                        <a href="/withdrawal-policy-page">
+                                                        <a href="#">
                                                             Withdrawal Policy
                                                         </a>
                                                     </li>

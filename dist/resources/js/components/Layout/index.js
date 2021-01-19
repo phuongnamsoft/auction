@@ -3,28 +3,25 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Footer from './Footer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Layout extends Component {
+
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <div>
                 <Header />
                 {this.props.children}
                 <Footer />
+                <ToastContainer />
             </div>
         );
     }
 }
-function mapStateToProps(state) {
-    return {
-        isToggleMenu: state.isToggleMenu,
-        isToggleSearch: state.isToggleSearch,
-        isToggleMessageForm: state.isToggleMessageForm,
-        isToggleReplyForm: state.isToggleReplyForm
-    };
-}
 
-export default connect(mapStateToProps, null)(Layout);
+export default connect(null, null)(Layout);

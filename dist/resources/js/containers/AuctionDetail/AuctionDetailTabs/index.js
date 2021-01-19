@@ -13,11 +13,15 @@ class AuctionDetailTabs extends Component {
     }
 
     componentDidMount() {
-
+        this.getAuctionHistories();
+        setInterval(()=> {
+            this.getAuctionHistories();
+        }, 3000);
     }
 
-    getAuctionDetail(id) {
-        HTTP.get('auction/' + id + '/bid-histories')
+    getAuctionHistories() {
+        const auctionId = this.props.item.id;
+        HTTP.get('auction/' + auctionId + '/bid-histories')
             .then(res => {
                 console.log(res);
                 if (res.status == 200) {
@@ -41,7 +45,6 @@ class AuctionDetailTabs extends Component {
     }
 
     render() {
-        const item = this.props.item;
         return (
             <div className="col-12">
                 <div className="single-blog mt-4">
@@ -64,9 +67,16 @@ class AuctionDetailTabs extends Component {
                                                     <td>ID</td>
                                                     <td>Bidder name</td>
                                                     <td>Amount</td>
-                                                    <td>Is winner</td>
-                                                    <td>Time</td>
+                                                    <td>Bid at</td>
                                                 </tr>
+                                                {this.state.items && this.state.items.map((item, i) =>
+                                                    <tr key={i}>
+                                                        <td>{item.id}</td>
+                                                        <td>{item.user_name}</td>
+                                                        <td>{item.amount}</td>
+                                                        <td>{item.created_at}</td>
+                                                    </tr>
+                                                )}
                                             </tbody>
                                         </table>
                                 </div>

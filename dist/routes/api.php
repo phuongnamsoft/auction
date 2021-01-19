@@ -36,4 +36,7 @@ Route::group([
     Route::post('/auction/{id}/bid-now', 'BidController@bidNow')->name('api.bid.bidNow');
     Route::post('/auction/{id}/auto-bid', 'BidController@autoBid')->name('api.bid.autoBid');
 
+    Route::get('/user', 'UserController@index')->name('api.user.index');
+    Route::post('/user', 'UserController@update')->name('api.user.update');
+
 });
