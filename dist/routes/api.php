@@ -31,5 +31,9 @@ Route::group([
     Route::get('/auth/check-login', 'AuthController@checkLogin')->name('api.auth.checkLogin');
     Route::get('/auctions', 'AuctionController@index')->name('api.auction.index');
     Route::get('/auction/{id}', 'AuctionController@detail')->name('api.auction.detail');
+    Route::get('/auction/{id}/bid-histories', 'AuctionController@bidHistories')->name('api.auction.bidHistories');
+
+    Route::post('/auction/{id}/bid-now', 'BidController@bidNow')->name('api.bid.bidNow');
+    Route::post('/auction/{id}/auto-bid', 'BidController@autoBid')->name('api.bid.autoBid');
 
 });

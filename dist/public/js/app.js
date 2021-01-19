@@ -2359,13 +2359,538 @@ function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./resources/js/containers/AuctionDetail/AuctionDetailTabs/index.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/containers/AuctionDetail/AuctionDetailTabs/index.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _utils_HTTP__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/HTTP */ "./resources/js/utils/HTTP/index.js");
+/* harmony import */ var _utils_StringHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils/StringHelper */ "./resources/js/utils/StringHelper/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var AuctionDetailTabs = /*#__PURE__*/function (_Component) {
+  _inherits(AuctionDetailTabs, _Component);
+
+  var _super = _createSuper(AuctionDetailTabs);
+
+  function AuctionDetailTabs(props) {
+    var _this;
+
+    _classCallCheck(this, AuctionDetailTabs);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      items: []
+    };
+    return _this;
+  }
+
+  _createClass(AuctionDetailTabs, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "getAuctionDetail",
+    value: function getAuctionDetail(id) {
+      var _this2 = this;
+
+      _utils_HTTP__WEBPACK_IMPORTED_MODULE_3__.default.get('auction/' + id + '/bid-histories').then(function (res) {
+        console.log(res);
+
+        if (res.status == 200) {
+          if (res.data.status === 1) {
+            _this2.setState(_objectSpread(_objectSpread({}, _this2.state), {}, {
+              items: res.data.items
+            }));
+          } else {
+            alert(res.data.message);
+            window.location.href = '/';
+          }
+        } else {
+          alert('Failed to handle the data. If it continues many times, please contact the administrator.\n');
+          window.location.href = '/';
+        }
+      })["catch"](function () {
+        alert('Failed to connect to the server.');
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var item = this.props.item;
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "col-12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: "single-blog mt-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            className: "custom-profile-nav",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("nav", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                className: "nav nav-tabs",
+                id: "nav-tab",
+                role: "tablist",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+                  className: "nav-item nav-link active",
+                  id: "bid-histories",
+                  "data-toggle": "tab",
+                  href: "#bid-histories",
+                  role: "tab",
+                  "aria-controls": "bid-histories",
+                  "aria-selected": "true",
+                  children: "Bidding Histories"
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+              className: "tab-content",
+              id: "nav-tabContent",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                className: "mt-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", {
+                  className: "table table-bordered table-responsive",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                        children: "ID"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                        children: "Bidder name"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                        children: "Amount"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                        children: "Is winner"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+                        children: "Time"
+                      })]
+                    })
+                  })
+                })
+              })
+            })]
+          })
+        })
+      });
+    }
+  }]);
+
+  return AuctionDetailTabs;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {};
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapStateToProps, null)(AuctionDetailTabs));
+
+/***/ }),
+
 /***/ "./resources/js/containers/AuctionDetail/index.js":
 /*!********************************************************!*\
   !*** ./resources/js/containers/AuctionDetail/index.js ***!
   \********************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\project\\auction\\dist\\resources\\js\\containers\\AuctionDetail\\index.js: JSX attributes must only be assigned a non-empty expression (195:113)\n\n\u001b[0m \u001b[90m 193 | \u001b[39m                                                        \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"form-group\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 194 | \u001b[39m                                                            \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"d-flex justify-content-center\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 195 | \u001b[39m                                                                \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"input-number-decrement\"\u001b[39m onClick\u001b[33m=\u001b[39m{}\u001b[33m>\u001b[39m–\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                                                                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 196 | \u001b[39m                                                                \u001b[33m<\u001b[39m\u001b[33minput\u001b[39m min\u001b[33m=\u001b[39m{ item\u001b[33m.\u001b[39mmin_bid_amount \u001b[33m+\u001b[39m \u001b[35m1\u001b[39m } value\u001b[33m=\u001b[39m{ item\u001b[33m.\u001b[39mmin_bid_amount \u001b[33m+\u001b[39m \u001b[35m1\u001b[39m } type\u001b[33m=\u001b[39m\u001b[32m\"text\"\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"input-number color-666\"\u001b[39m  \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 197 | \u001b[39m                                                                \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"input-number-increment\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33m+\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 198 | \u001b[39m                                                            \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Object.raiseWithData (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Object.raise (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Object.jsxParseAttributeValue (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4583:16)\n    at Object.jsxParseAttribute (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4632:44)\n    at Object.jsxParseOpeningElementAfterName (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4652:28)\n    at Object.jsxParseOpeningElementAt (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4645:17)\n    at Object.jsxParseElementAt (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4677:33)\n    at Object.jsxParseElementAt (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4693:32)\n    at Object.jsxParseElementAt (D:\\project\\auction\\dist\\node_modules\\@babel\\parser\\lib\\index.js:4693:32)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _utils_HTTP__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/HTTP */ "./resources/js/utils/HTTP/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_StringHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/StringHelper */ "./resources/js/utils/StringHelper/index.js");
+/* harmony import */ var _common_MyCountdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/MyCountdown */ "./resources/js/containers/common/MyCountdown/index.js");
+/* harmony import */ var _AuctionDetailTabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AuctionDetailTabs */ "./resources/js/containers/AuctionDetail/AuctionDetailTabs/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+
+var AuctionDetail = /*#__PURE__*/function (_Component) {
+  _inherits(AuctionDetail, _Component);
+
+  var _super = _createSuper(AuctionDetail);
+
+  function AuctionDetail(props) {
+    var _this;
+
+    _classCallCheck(this, AuctionDetail);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      error: false,
+      isLoaded: false,
+      item: null,
+      minBidAmount: 0,
+      currentBidAmount: 0,
+      auctionId: _this.props.match.params.id
+    };
+    return _this;
+  }
+
+  _createClass(AuctionDetail, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getAuctionDetail(this.props.match.params.id);
+    }
+  }, {
+    key: "getAuctionDetail",
+    value: function getAuctionDetail(id) {
+      var _this2 = this;
+
+      _utils_HTTP__WEBPACK_IMPORTED_MODULE_3__.default.get('auction/' + id).then(function (res) {
+        if (res.status == 200) {
+          if (res.data.status === 1) {
+            _this2.setState(_objectSpread(_objectSpread({}, _this2.state), {}, {
+              item: res.data.item,
+              minBidAmount: parseInt(res.data.item.min_bid_amount < res.data.item.currentBidAmount ? res.data.item.currentBidAmount : res.data.item.min_bid_amount),
+              currentBidAmount: parseInt(res.data.item.min_bid_amount < res.data.item.currentBidAmount ? res.data.item.currentBidAmount : res.data.item.min_bid_amount) + 1
+            }));
+          } else {
+            alert(res.data.message);
+            window.location.href = '/';
+          }
+        } else {
+          alert('Failed to handle the data. If it continues many times, please contact the administrator.\n');
+          window.location.href = '/';
+        }
+      })["catch"](function () {
+        alert('Failed to connect to the server.');
+      });
+    }
+  }, {
+    key: "currentBidAmountChange",
+    value: function currentBidAmountChange(event) {
+      this.setState(_objectSpread(_objectSpread({}, this.state), {}, {
+        currentBidAmount: event.target.value
+      }));
+    }
+  }, {
+    key: "bidNowBtn",
+    value: function bidNowBtn(event) {}
+  }, {
+    key: "autoBidBtn",
+    value: function autoBidBtn(event) {
+      var auctionId = this.props.match.params.id;
+      _utils_HTTP__WEBPACK_IMPORTED_MODULE_3__.default.post('auction/' + auctionId + '/auto-bid', {}).then(function (res) {
+        if (res.status == 200) {
+          if (res.data.status === 1) {
+            alert('Successfully.\n');
+          } else {
+            alert(res.data.message);
+            window.location.href = '/';
+          }
+        } else {
+          alert('Failed to handle the data. If it continues many times, please contact the administrator.\n');
+          window.location.href = '/';
+        }
+      })["catch"](function () {
+        alert('Failed to connect to the server.');
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var item = this.state.item;
+
+      if (!item) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          children: "404 not found"
+        });
+      }
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "content-wrapper",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: "content",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "p-b-100 p-t-80",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+              className: "container",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                  className: "col-12",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                    className: "card mb-4 rm-border",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                      className: "property-title card-body px-0",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        className: "property-top",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                          className: "row",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "col-lg-8 col-md-12",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                              className: "item-name font-weight-bold",
+                              children: item.name
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                              className: "property-overview mt-1",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+                                className: "nav",
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+                                  className: "color-999",
+                                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
+                                    className: "fa fa-flag"
+                                  }), "By ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+                                    href: "#",
+                                    children: item.user_name
+                                  })]
+                                })
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                              className: "property-overview mt-2",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+                                className: "nav",
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+                                  className: "color-999",
+                                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
+                                    className: "fa fa-clock-o"
+                                  }), item.created_at]
+                                })
+                              })
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                            className: "col-lg-4 col-md-12",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                              className: "property-price align-self-center",
+                              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
+                                className: "m-b-10 font-weight-bold text-capitalize",
+                                children: "Bid Start From"
+                              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                className: "color-999",
+                                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                                  children: item.currency_code
+                                }), " ", _utils_StringHelper__WEBPACK_IMPORTED_MODULE_5__.default.formatMoney(item.min_bid_amount)]
+                              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                                className: "badge text-white fz-12 font-weight-normal badge-pill badge-success",
+                                children: " Running "
+                              })]
+                            })
+                          })]
+                        })
+                      })
+                    })
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                  className: "col-md-12 col-lg-7 order-lg-0",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                    className: "m-md-top-50",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                      className: "owl-six position-relative",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        className: "owl-carousel owl-theme",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                          className: "item",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+                            className: "img-fluid",
+                            src: item.image,
+                            alt: "Image"
+                          })
+                        })
+                      })
+                    })
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                  className: "col-md-12 col-lg-5 order-lg-0",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "s-box mb-3",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                      className: "s-box-header",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                        children: " Ends "
+                      }), " In"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                      className: "count-down d-inline-block",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        className: "timer d-inline-block",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_MyCountdown__WEBPACK_IMPORTED_MODULE_6__.default, {
+                          endDate: item.end_date
+                        })
+                      })
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "s-box",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                      className: "s-box-header",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                        children: "Bidding"
+                      }), " Section"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                      className: "popular-cat",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
+                        className: "list-group",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+                          className: "list-group-item d-flex justify-content-between align-items-center",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                            children: " Auction Type: "
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                            className: "badge badge-info",
+                            children: "Highest Bid"
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+                          className: "list-group-item d-flex justify-content-between align-items-center",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                            children: " Multiple Bid Allowed: "
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                            className: "badge badge-pill bg-success text-white",
+                            children: "Yes"
+                          })]
+                        })]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+                        className: "list-group mt-3",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+                          className: "list-group-item d-flex justify-content-between align-items-center",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                            className: "font-weight-bold color-666",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                              id: "pusher-text",
+                              children: "Minimum Bid Amount"
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                            className: "badge bg-info text-white badge-pill",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                              className: "mr-1 font-weight-normal",
+                              children: item.currency_code
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                              id: "pusher-amount",
+                              children: _utils_StringHelper__WEBPACK_IMPORTED_MODULE_5__.default.formatMoney(this.state.minBidAmount)
+                            })]
+                          })]
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        className: "list-group mt-3",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                          className: "list-group-item py-4",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "form-group",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                              className: "d-flex justify-content-center",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+                                min: this.state.minBidAmount + 1,
+                                value: this.state.currentBidAmount,
+                                onChange: this.currentBidAmountChange.bind(this),
+                                type: "number",
+                                className: "input-number color-666"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                              className: "invalid-feedback d-block"
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                            type: "button",
+                            className: "btn lf-custom-btn w-100 float-right",
+                            onClick: this.bidNowBtn.bind(this),
+                            children: "Bid Now"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                            type: "button",
+                            className: "btn btn-success w-100 float-right mt-2",
+                            onClick: this.autoBidBtn.bind(this),
+                            children: "Auto Bid"
+                          })]
+                        })
+                      })]
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AuctionDetailTabs__WEBPACK_IMPORTED_MODULE_7__.default, {
+                  item: item
+                })]
+              })
+            })
+          })
+        })
+      });
+    }
+  }]);
+
+  return AuctionDetail;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isToggleTabControl: state.isToggleTabControl
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapStateToProps, null)(AuctionDetail));
 
 /***/ }),
 
@@ -2526,7 +3051,6 @@ var Home = /*#__PURE__*/function (_Component) {
           className: "content",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
             className: "cmb-content-wrapper",
-            id: "cmb-content-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("section", {
               className: "cmb_section mt-5 mb-5",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -2742,7 +3266,7 @@ var Login = /*#__PURE__*/function (_Component) {
         if (token) {
           window.location.href = '/';
         }
-      }, 500);
+      }, 1000);
     }
   }, {
     key: "handleCheckEmail",

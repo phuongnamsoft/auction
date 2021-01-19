@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\AuctionModel;
+use App\Models\BidModel;
 
 class AuctionController extends BaseController {
 
@@ -28,7 +29,7 @@ class AuctionController extends BaseController {
     }
 
     public function detail(Request $request, $id) {
-        try{
+        try {
             $result = (new AuctionModel)->getJoinQuery()->find($id);
             if (!$result) {
                 return response(['status' => 0, 'message' => 'Item not found'], 404);
@@ -36,8 +37,16 @@ class AuctionController extends BaseController {
             if (!$result->status) {
                 return response(['status' => 0, 'message' => 'Item not active'], 404);
             }
-
+            $result->currentBidAmount = (new BidModel)->where('auction_id', $id)->max('amount');
             return response(['status' => 1, 'message' => 'Success', 'item' => $result->toArray()], 200);
+        } catch (\Throwable $t) {
+            return response(['status' => 0, 'message' => 'Error:' . $t->getMessage()], 500);
+        }
+    }
+
+    public function bidHistories(Request $request, $id) {
+        try {
+            return response(['status' => 1, 'message' => 'Success', 'items' => (new BidModel)->getByCond(['auction_id' => $id], ['id' => 'desc'])], 200);
         } catch (\Throwable $t) {
             return response(['status' => 0, 'message' => 'Error:' . $t->getMessage()], 500);
         }

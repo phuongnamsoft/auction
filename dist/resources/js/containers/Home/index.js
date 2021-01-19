@@ -80,10 +80,8 @@ class Home extends Component {
 
         return (
             <div className="content-wrapper">
-
                 <div className="content">
-                    <div className="cmb-content-wrapper" id="cmb-content-wrapper">
-
+                    <div className="cmb-content-wrapper">
                         <section className="cmb_section mt-5 mb-5">
                             <div className="section-overlay">
                                 <div className="cmb_container container">
@@ -129,20 +127,18 @@ class Home extends Component {
                                         <div className="row mt-3">
                                             <div className="lf-pagination col-md-12">
                                                 <ReactPaginate pageCount={this.state.pageCount}
-                                                               pageRangeDisplayed={1}
-                                                               marginPagesDisplayed={1}
-                                                               containerClassName="pagination"
-                                                               pageClassName="page-item"
-                                                               activeClassName={'active'}
-                                                               pageLinkClassName={'page-link'}
-                                                               previousClassName="page-item"
-                                                               previousLinkClassName="page-link"
-                                                               nextClassName="page-item"
-                                                               nextLinkClassName="page-link"
-                                                               onChange={this.handlePageChange.bind(this)}
-                                                               onPageChange={this.handlePageChange.bind(this)}
-
-                                                />
+                                                   pageRangeDisplayed={1}
+                                                   marginPagesDisplayed={1}
+                                                   containerClassName="pagination"
+                                                   pageClassName="page-item"
+                                                   activeClassName={'active'}
+                                                   pageLinkClassName={'page-link'}
+                                                   previousClassName="page-item"
+                                                   previousLinkClassName="page-link"
+                                                   nextClassName="page-item"
+                                                   nextLinkClassName="page-link"
+                                                   onChange={this.handlePageChange.bind(this)}
+                                                   onPageChange={this.handlePageChange.bind(this)} />
                                             </div>
                                         </div>
                                     </div>

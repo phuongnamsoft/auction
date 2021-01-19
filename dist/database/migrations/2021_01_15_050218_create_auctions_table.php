@@ -25,7 +25,6 @@ class CreateAuctionsTable extends Migration
             $table->text('content');
             $table->text('description');
             $table->string('image', 255)->nullable();
-            $table->text('images')->nullable();
 
             $table->integer('min_bid_amount')->unsigned();
             $table->integer('shipping_fee')->unsigned();

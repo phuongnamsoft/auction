@@ -31,7 +31,7 @@ class Login extends Component {
             if (token) {
                 window.location.href = '/';
             }
-        }, 500);
+        }, 1000);
     }
 
     handleCheckEmail(e) {
